@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A weekly research review, curated for the lab — papertrail"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>papertrail — Lab weekly research review</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="masthead shell">
+        <a class="wordmark" href="#top" aria-label="papertrail home">papertrail</a>
+        <div class="masthead-tools">
+          <span class="issue-label" id="issue-label">WEEKLY REVIEW</span>
+          <button class="utility-button" id="saved-nav-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M6.5 3.5h11v17l-5.5-3.7-5.5 3.7z" />
+            </svg>
+            <span>Saved</span>
+            <span class="count-pill" id="saved-count">0</span>
+          </button>
+          <button class="utility-button" id="search-nav-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m15.5 15.5 5 5" />
+            </svg>
+            <span>Search</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <div class="shell primary-nav-inner">
+          <button class="mobile-menu-button" id="mobile-menu-button" type="button" aria-expanded="false">
+            <span>Menu</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+          <div class="nav-links" id="nav-links">
+            <a href="#this-week">This week</a>
+            <a href="#papers">All papers</a>
+            <a href="#lab-ideas">Lab ideas</a>
+            <a href="#feedback">Feedback</a>
+            <a href="#about">About</a>
+          </div>
+          <div class="week-control">
+            <label for="week-select">Archive</label>
+            <select id="week-select" aria-label="Select a past weekly review">
+              <option>Loading…</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+      <div class="header-rule" aria-hidden="true"></div>
+    </header>
+
+    <nav class="breadcrumb-bar shell" aria-label="Breadcrumb">
+      <a href="#top">papertrail</a>
+      <span aria-hidden="true">›</span>
+      <a href="#papers">weekly reviews</a>
+      <span aria-hidden="true">›</span>
+      <span id="breadcrumb-current">this week</span>
+    </nav>
+
+    <main id="main-content">
+      <section class="loading-state shell" id="loading-state" aria-live="polite">
+        <div class="loading-kicker skeleton"></div>
+        <div class="loading-title skeleton"></div>
+        <div class="loading-title short skeleton"></div>
+        <div class="loading-grid">
+          <div class="loading-card skeleton"></div>
+          <div class="loading-card skeleton"></div>
+          <div class="loading-card skeleton"></div>
+        </div>
+      </section>
+
+      <div id="app-content" hidden>
+        <section class="issue-hero shell" id="this-week">
+          <div class="issue-meta-line">
+            <p class="eyebrow" id="hero-eyebrow">LAB WEEKLY RESEARCH REVIEW</p>
+            <p class="issue-date" id="issue-date"></p>
+          </div>
+          <div class="hero-grid">
+            <article class="lead-story">
+              <p class="section-label">The week in science</p>
+              <h1 id="digest-title">This week in research</h1>
+              <p class="standfirst korean-copy" id="digest-summary" lang="ko"></p>
+              <div class="topic-row" id="digest-keywords" aria-label="Key topics this week"></div>
+              <button class="text-link" id="digest-expand" type="button" aria-expanded="false">
+                Read the editor’s note <span aria-hidden="true">↓</span>
+              </button>
+              <div class="editor-note korean-copy" id="editor-note" lang="ko" hidden></div>
+            </article>
+
+            <aside class="issue-dashboard" aria-label="This week at a glance">
+              <div class="dashboard-heading">
+                <p class="section-label">At a glance</p>
+                <p id="updated-time"></p>
+              </div>
+              <div class="stat-grid">
+                <div class="stat-block">
+                  <strong id="stat-papers">—</strong>
+                  <span>Selected papers</span>
+                </div>
+                <div class="stat-block">
+                  <strong id="stat-collected">—</strong>
+                  <span>Screened</span>
+                </div>
+                <div class="stat-block accent">
+                  <strong id="stat-must-read">—</strong>
+                  <span>Must read</span>
+                </div>
+                <div class="stat-block">
+                  <strong id="stat-lab-ideas">—</strong>
+                  <span>Lab ideas</span>
+                </div>
+              </div>
+              <div class="tracker-status" id="tracker-status"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="must-read-section shell" aria-labelledby="must-read-title">
+          <div class="section-heading ruled-heading">
+            <div>
+              <p class="section-label red">Editor’s selection</p>
+              <h2 id="must-read-title">Start with these papers</h2>
+            </div>
+            <p>Selected for relevance, scientific value and discussion potential.</p>
+          </div>
+          <div class="must-read-grid" id="must-read-grid"></div>
+        </section>
+
+        <section class="lab-ideas-section" id="lab-ideas" aria-labelledby="ideas-title">
+          <div class="shell ideas-grid">
+            <div class="ideas-intro">
+              <p class="section-label inverted">From reading to doing</p>
+              <h2 id="ideas-title">From reading<br />to the next experiment</h2>
+              <p>Concrete follow-ups extracted from this week’s most useful papers.</p>
+            </div>
+            <div class="ideas-list" id="ideas-list"></div>
+          </div>
+        </section>
+
+        <section class="paper-library shell" id="papers" aria-labelledby="library-title">
+          <div class="section-heading library-heading">
+            <div>
+              <p class="section-label">Research archive</p>
+              <h2 id="library-title">All papers this week</h2>
+            </div>
+            <p id="result-summary" aria-live="polite"></p>
+          </div>
+
+          <div class="library-toolbar" id="library-toolbar">
+            <div class="search-box">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="10.5" cy="10.5" r="6.5" />
+                <path d="m15.5 15.5 5 5" />
+              </svg>
+              <label class="sr-only" for="paper-search">Search papers</label>
+              <input
+                id="paper-search"
+                type="search"
+                placeholder="Search titles, journals, keywords or topics"
+                autocomplete="off"
+              />
+              <kbd>/</kbd>
+            </div>
+            <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false">
+              Filters <span id="active-filter-count"></span>
+            </button>
+          </div>
+
+          <div class="filter-panel" id="filter-panel">
+            <fieldset>
+              <legend>Tracker</legend>
+              <div class="segmented-control" id="tracker-filters">
+                <button class="is-active" type="button" data-filter="tracker" data-value="all">All</button>
+                <button type="button" data-filter="tracker" data-value="flagship">Flagship</button>
+                <button type="button" data-filter="tracker" data-value="preprints">Preprints</button>
+                <button type="button" data-filter="tracker" data-value="compbio">CompBio / AI</button>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Priority</legend>
+              <div class="check-row" id="priority-filters">
+                <label><input type="checkbox" value="must-read" /> Must read</label>
+                <label><input type="checkbox" value="high-interest" /> High interest</label>
+                <label><input type="checkbox" value="sleeper" /> Sleeper</label>
+                <label><input type="checkbox" value="watchlist" /> Watchlist</label>
+              </div>
+            </fieldset>
+            <label class="saved-only-label">
+              <input type="checkbox" id="saved-only" />
+              Saved papers only
+            </label>
+            <button class="clear-filters" id="clear-filters" type="button">Clear filters</button>
+          </div>
+
+          <div class="active-chips" id="active-chips"></div>
+          <div class="paper-list" id="paper-list"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <p class="empty-mark">∅</p>
+            <h3>No papers found.</h3>
+            <p>Try a broader query or clear a filter.</p>
+            <button type="button" id="empty-reset">View all papers</button>
+          </div>
+          <button class="load-more" id="load-more" type="button" hidden>Load more papers</button>
+        </section>
+
+        <section class="feedback-section" id="feedback" aria-labelledby="feedback-title">
+          <div class="shell feedback-grid">
+            <div class="feedback-intro">
+              <p class="section-label red">Improve papertrail</p>
+              <h2 id="feedback-title">What should we<br />change next?</h2>
+              <p class="korean-copy" lang="ko">
+                찾고 싶은 기능, 추가했으면 하는 논문 분야, 읽다가 불편했던 점을 남겨주세요.
+                의견은 연구실 VM에 바로 저장되며 다음 업데이트에 반영할 수 있습니다.
+              </p>
+            </div>
+            <form class="feedback-form" id="feedback-form">
+              <div class="feedback-fields-row">
+                <label>
+                  <span>Your name <em>Optional</em></span>
+                  <input id="feedback-name" name="name" type="text" maxlength="80" autocomplete="name" placeholder="Name or initials" />
+                </label>
+                <label>
+                  <span>Feedback type</span>
+                  <select id="feedback-category" name="category">
+                    <option>Suggestion</option>
+                    <option>Content request</option>
+                    <option>Bug</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+              </div>
+              <label class="feedback-message-label">
+                <span>Request or feedback</span>
+                <textarea id="feedback-message" name="message" minlength="5" maxlength="2000" rows="5" required placeholder="Tell us what would make the weekly review more useful."></textarea>
+              </label>
+              <label class="feedback-honeypot" aria-hidden="true">
+                Website
+                <input id="feedback-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </label>
+              <div class="feedback-submit-row">
+                <p id="feedback-status" role="status" aria-live="polite">Stored privately on the lab VM.</p>
+                <button id="feedback-submit" type="submit">Send feedback</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="about-section" id="about">
+          <div class="shell about-grid">
+            <div>
+              <p class="section-label inverted">About papertrail</p>
+              <h2>Beyond collecting papers:<br />finding better questions.</h2>
+            </div>
+            <div class="about-copy">
+              <p class="korean-copy" lang="ko">
+                세 개의 연구 트래커가 매주 저널과 프리프린트를 수집하고, 랩 관심도·방법론적 가치·후속 실험 가능성을 기준으로 선별합니다.
+                papertrail은 그 결과를 랩 미팅에서 실제로 쓸 수 있는 편집물로 바꿉니다.
+              </p>
+              <p class="about-note">UPDATED EVERY FRIDAY · SOURCE LINKS OPEN IN A NEW TAB</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="error-state shell" id="error-state" hidden>
+        <p class="section-label red">Connection error</p>
+        <h1>We couldn’t load this week’s review.</h1>
+        <p id="error-message"></p>
+        <button id="retry-button" type="button">Try again</button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-top">
+        <div>
+          <a class="wordmark footer-wordmark" href="#top">papertrail</a>
+          <p>Lab weekly research review</p>
+        </div>
+        <div class="footer-links">
+          <a href="#this-week">This week</a>
+          <a href="#papers">All papers</a>
+          <a href="#feedback">Feedback</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <span>Internal research tool</span>
+        <span id="footer-update"></span>
+      </div>
+    </footer>
+
+    <template id="save-icon-template">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M6.5 3.5h11v17l-5.5-3.7-5.5 3.7z" />
+      </svg>
+    </template>
+  </body>
+</html>
